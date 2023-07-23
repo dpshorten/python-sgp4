@@ -5,7 +5,7 @@ __all__ = (
     'accelerated', 'jday', 'days2mdhms',
 )
 
-from .functions import jday, days2mdhms
+from functions import jday, days2mdhms
 
 SGP4_ERRORS = {
     1: 'mean eccentricity is outside the range 0.0 to 1.0',
@@ -17,11 +17,11 @@ SGP4_ERRORS = {
 }
 
 try:
-    from .wrapper import Satrec, SatrecArray
+    from wrapper import Satrec, SatrecArray
     accelerated = True
 except ImportError:
-    from .model import Satrec, SatrecArray
-    from .model import WGS72OLD, WGS72, WGS84
+    from model import Satrec, SatrecArray
+    from model import WGS72OLD, WGS72, WGS84
     accelerated = False
 else:
-    from .vallado_cpp import WGS72OLD, WGS72, WGS84
+    from vallado_cpp import WGS72OLD, WGS72, WGS84

@@ -7,7 +7,7 @@ itself, native Python datetime handling could be convenient.
 """
 import datetime as dt
 import sgp4
-from .functions import days2mdhms, jday
+from functions import days2mdhms, jday
 
 class _UTC(dt.tzinfo):
     'UTC'

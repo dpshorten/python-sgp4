@@ -1156,13 +1156,13 @@ def _initl(
      cosio2 = cosio * cosio;
 
      #  ------------------ un-kozai the mean motion -----------------
-     ak    = pow(xke / no, x2o3);
-     d1    = 0.75 * j2 * (3.0 * cosio2 - 1.0) / (rteosq * omeosq);
-     del_  = d1 / (ak * ak);
-     adel  = ak * (1.0 - del_ * del_ - del_ *
-             (1.0 / 3.0 + 134.0 * del_ * del_ / 81.0));
-     del_  = d1/(adel * adel);
-     no    = no / (1.0 + del_);
+     #ak    = pow(xke / no, x2o3);
+     #d1    = 0.75 * j2 * (3.0 * cosio2 - 1.0) / (rteosq * omeosq);
+     #del_  = d1 / (ak * ak);
+     #adel  = ak * (1.0 - del_ * del_ - del_ *
+      #       (1.0 / 3.0 + 134.0 * del_ * del_ / 81.0));
+     #del_  = d1/(adel * adel);
+     #no    = no / (1.0 + del_);
 
      ao    = pow(xke / no, x2o3);
      sinio = sin(inclo);
@@ -1494,6 +1494,7 @@ def sgp4init(
 
          #  --------------- deep space initialization -------------
          if 2*pi / satrec.no_unkozai >= 225.0:
+         #if True:
 
              satrec.method = 'd';
              satrec.isimp  = 1;
@@ -1711,8 +1712,10 @@ def sgp4(satrec, tsince, whichconst=None):
      satrec.error_message = None
 
      #  ------- update for secular gravity and atmospheric drag -----
-     xmdf    = satrec.mo + satrec.mdot * satrec.t;
-     argpdf  = satrec.argpo + satrec.argpdot * satrec.t;
+     #xmdf    = satrec.mo + satrec.mdot * satrec.t;
+     xmdf = satrec.mo;
+     #argpdf  = satrec.argpo + satrec.argpdot * satrec.t;
+     argpdf = satrec.argpo;
      nodedf  = satrec.nodeo + satrec.nodedot * satrec.t;
      argpm   = argpdf;
      mm      = xmdf;
@@ -1746,7 +1749,8 @@ def sgp4(satrec, tsince, whichconst=None):
      em    = satrec.ecco;
      inclm = satrec.inclo;
      if satrec.method == 'd':
-
+     #if True:
+         #print("deep space")
          tc = satrec.t;
          (
              atime, em,    argpm,  inclm, xli,
@@ -1800,6 +1804,13 @@ def sgp4(satrec, tsince, whichconst=None):
      argpm  = argpm % twopi
      xlm    = xlm % twopi
      mm     = (xlm - argpm - nodem) % twopi
+     mm = mm - twopi
+
+     # nodem = nodem if nodem >= 0.0 else -(-nodem)
+     # argpm = argpm
+     # xlm = xlm
+     # mm = (xlm - argpm - nodem)
+     # mm = mm - twopi
 
      # sgp4fix recover singly averaged mean elements
      satrec.am = am;
