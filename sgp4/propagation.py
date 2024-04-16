@@ -1712,11 +1712,12 @@ def sgp4(satrec, tsince, whichconst=None):
      satrec.error_message = None
 
      #  ------- update for secular gravity and atmospheric drag -----
-     #xmdf    = satrec.mo + satrec.mdot * satrec.t;
-     xmdf = satrec.mo;
-     #argpdf  = satrec.argpo + satrec.argpdot * satrec.t;
-     argpdf = satrec.argpo;
+     xmdf    = satrec.mo + satrec.mdot * satrec.t;
+     #xmdf = satrec.mo;
+     argpdf  = satrec.argpo + satrec.argpdot * satrec.t;
+     #argpdf = satrec.argpo;
      nodedf  = satrec.nodeo + satrec.nodedot * satrec.t;
+     #nodedf = satrec.nodeo;
      argpm   = argpdf;
      mm      = xmdf;
      t2      = satrec.t * satrec.t;
@@ -1726,7 +1727,7 @@ def sgp4(satrec, tsince, whichconst=None):
      templ   = satrec.t2cof * t2;
 
      if satrec.isimp != 1:
-
+     #if True:
          delomg = satrec.omgcof * satrec.t;
          #  sgp4fix use mutliply for speed instead of pow
          delmtemp =  1.0 + satrec.eta * cos(xmdf);
