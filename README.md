@@ -15,6 +15,6 @@ This is a utility package which provides a python implementation of the SGP4 pro
 
 ## Package Structure
 
-This package is a fork of the original `python-sgpy` package (<github.com/brandon-rhodes/python-sgp4>). 
+This package is a fork of the original `python-sgp4` package (<github.com/brandon-rhodes/python-sgp4>). 
 It contains only minor changes. Specifically, the Kozai to Brouwer conversion has been removed. This is instead performed
 within the `TLE_utilities` package as an initial step in the processing of the TLE data. 
